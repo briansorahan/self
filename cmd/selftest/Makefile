@@ -1,12 +1,5 @@
-package si
-
-import (
-	"text/template"
-)
-
-func (t Tmpls) makefile() *template.Template {
-	return template.Must(template.New("makefile").Parse(`APPNAME              = {{.Name}}
-IMG                 ?= {{.Repo}}
+APPNAME              = selftest
+IMG                 ?= bsorahan/
 BUILD_IMG            = $(APPNAME):build
 VERSION             ?= latest
 RELEASE_IMG          = $(APPNAME):$(VERSION)
@@ -32,5 +25,3 @@ release: .assets.tar
 	docker run --rm $(BUILD_IMG) tar cf - /app $(EXTRA_ASSETS) > $@
 
 .PHONY: clean push release
-`))
-}

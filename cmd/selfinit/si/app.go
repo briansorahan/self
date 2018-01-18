@@ -37,7 +37,7 @@ func NewApp(name string, fe flag.ErrorHandling) (*App, error) {
 	a.flagset.StringVar(&a.BuildOutput, "build-output", "/app", "Path to binary in build image.")
 	a.flagset.StringVar(&a.Name, "name", "", "(required) Application name.")
 	a.flagset.StringVar(&a.Org, "org", "", "(required) Github organization.")
-	a.flagset.StringVar(&a.Repo, "repo", "bsorahan", "Dockerhub repo name.")
+	a.flagset.StringVar(&a.Repo, "repo", "bsorahan/"+a.Name, "Dockerhub repo name.")
 
 	if err := a.flagset.Parse(os.Args[1:]); err != nil {
 		if err == flag.ErrHelp {
@@ -104,7 +104,7 @@ func (t Tmpls) app() *template.Template {
 
 import (
 	"context"
-	"log"
+	"flag"
 	"os"
 
 	"github.com/pkg/errors"
